@@ -46,6 +46,3 @@ console.log(appData.timeData);
 console.log(appData.income);
 console.log(appData.savings);
 */
-
-
-alert('Hello world!');
