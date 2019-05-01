@@ -1,48 +1,75 @@
-let money,
-	time;
+let money = +prompt('Ваш бюджет на месяц?', ''),
+	time = prompt('Введите дату в формате YYYY-MM-DD', '');
 
-money = prompt('Ваш бюджет на месяц?');
-time = prompt('Введите дату в формате YYYY-MM-DD');
-
-
-
-//create an object appData
-var appData = {
-	budget: 	money,
-	timeData: 	time,
-	expenses: 	{},
-	income: 	[]
+let appData = {
+	budget: 			money,
+	expenses: 			{},
+	optionalExpenses: 	{},
+	income: 			[],
+	timeData: 			time,
+	savings: 			false
 	};
 
-let income = [];
-appData.savings = false;
 
-let ques1 = 'введите обязательную статью расходов в этом месяце',
-	ques2 = 'Во сколько это обойдётся?';
+for (let i  = 0; i < 2; i++) {
+	let a = prompt('введите обязательную статью расходов в этом месяце', ''),
+		b = prompt('Во сколько это обойдётся?', '');
+
+	if ( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b))
+	!= null && a != '' && b != '' && a.length < 50) {
+		console.log("done");
+		appData.expenses[a] = b;
+	} else {
+		alert('Статья расходов введена неверно. Исправьте пожалуйста');
+		i--;
+	}
+};
+
+/*let i = 0;
+while (i < 2) {
+	let a = prompt('введите обязательную статью расходов в этом месяце', ''),
+		b = prompt('Во сколько это обойдётся?', '');
+
+	if ( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b))
+	!= null && a != '' && b != '' && a.length < 50) {
+		console.log("done");
+		appData.expenses[a] = b;
+	} else {
+		alert('Статья расходов введена неверно. Исправьте пожалуйста');
+		i--;
+	}
+	i++;
+}*/
+
+/*let i = 0;
+do {
+	let a = prompt('введите обязательную статью расходов в этом месяце', ''),
+		b = prompt('Во сколько это обойдётся?', '');
+
+	if ( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b))
+	!= null && a != '' && b != '' && a.length < 50) {
+		console.log("done");
+		appData.expenses[a] = b;
+	} else {
+		alert('Статья расходов введена неверно. Исправьте пожалуйста');
+		i--;
+	}
+	i++;
+} while (i < 2);*/
 
 
-let item1 = prompt(ques1);
-let cost1 = prompt(ques2);
-let item2 = prompt(ques1);
-let cost2 = prompt(ques2);
+appData.moneyPerDay = appData.budget / 30;
 
-//create an object expenses
+alert("Ежедневный бюджет: " + appData.moneyPerDay);
 
-let expenses = {
-	[item1]: cost1,
-	[item2]: cost2
-	};
-
-alert('бюджет за 1 день = ' + (appData.budget / 30));
-
-//test of script
-
-/*for (var key in expenses) {
-	console.log( "Ключ: " + key + " значение: " + expenses[key] );
+if (appData.moneyPerDay <= 100) {
+	console.log('Низкий уровень достатка');
+} else if (appData.moneyPerDay > 100 && appData.moneyPerDay <= 2000) {
+	console.log('Средний уровень достатка');
+} else if (appData.moneyPerDay > 2000) {
+	console.log('Высокий уровень достатка');
+} else {
+	console.log('Произошла ошибка');
 }
 
-console.log(appData.budget);
-console.log(appData.timeData);
-console.log(appData.income);
-console.log(appData.savings);
-*/
+console.log(appData);
